@@ -33,32 +33,34 @@ function game() {
         if (playerPoints != 5 && computerPoints != 5){
             if (winner == 'player') {
                 playerPoints += 1;
-                pTagPlayer.textContent = `You: ${playerPoints}`
+                pTagPlayer.textContent = `You: ${playerPoints}`;
+                if (playerPoints == 5) {
+                    buttons.forEach((button) => {
+                        button.style.opacity = '50%';
+                        button.style.cursor = 'default'
+                    });
+        
+                    pTagPlayer.style.color = 'yellow';
+                    pTagPlayer.textContent = 'You won!'
+                    pTagComputer.style.opacity = '60%';
+                }
             } else if (winner == 'computer') {
                 computerPoints += 1;
                 pTagComputer.textContent = `Computer: ${computerPoints}`
+                if (computerPoints == 5) {
+                    buttons.forEach((button) => {
+                        button.style.opacity = '50%';
+                        button.style.cursor = 'default'
+                    });
+        
+                    pTagPlayer.style.opacity = '60%';
+                    pTagComputer.style.color = 'yellow';
+                    pTagComputer.textContent = 'The computer won!'
+                }
             } else if (winner == 'tie!') {
                 pTagTie.style.cssText = 'color: yellow; opacity: 100%'
                 setTimeout(() => {pTagTie.style.cssText = 'color: yellow; transition: opacity 1s; opacity: 0%;'}, 500) // fade in-out effect
             }
-        }else if (playerPoints == 5) {
-            buttons.forEach((button) => {
-                button.style.opacity = '50%';
-                button.style.cursor = 'default'
-            });
-
-            pTagPlayer.style.color = 'yellow';
-            pTagPlayer.textContent = 'You won!'
-            pTagComputer.style.opacity = '60%';
-        } else if (computerPoints == 5) {
-            buttons.forEach((button) => {
-                button.style.opacity = '50%';
-                button.style.cursor = 'default'
-            });
-
-            pTagPlayer.style.opacity = '60%';
-            pTagComputer.style.color = 'yellow';
-            pTagComputer.textContent = 'The computer won!'
         }
     })});
 }
