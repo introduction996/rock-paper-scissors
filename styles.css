@@ -1,0 +1,75 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(19, 19, 19);
+}
+
+
+/*finish this*/
+#title {
+    font-size: 50px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    margin: 25px;
+    color: white;
+}
+
+.computer,.player, .tie {
+    font-size: 32px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    min-width: 30%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tie {
+    color: yellow;
+    opacity: 0%;
+    transition: opacity 1s;
+}
+
+.score {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    width: 56rem;
+    margin: 30px;
+}
+
+.option {
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+    flex-shrink: 1;
+    border: 5px solid white;
+    border-radius: 12px;
+    background-color: rgb(40, 40, 40);
+}
+
+.option:hover {
+    opacity: 90%;
+}
+
+.option:active {
+    opacity: 80%;
+    border: 5px solid yellow;
+}
+
+.options-container {
+    display: flex;
+    gap: 16px;
+}
+

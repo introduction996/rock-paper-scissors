@@ -5,48 +5,73 @@ function getComputerChoice() {
 }
 
 
-function getPlayerChoice(choice) {
-    choice = choice.toLowerCase();
-    return choice
+let playerPoints = 0;
+let computerPoints = 0;
+
+const pTagPlayer = document.querySelector('.player');
+const pTagComputer = document.querySelector('.computer');
+const pTagTie = document.querySelector('.tie');
+
+
+function game() {
+    let playerChoice;
+    const buttons = document.querySelectorAll('.option');
+    buttons.forEach((button) => {button.addEventListener('click', () => {
+        buttonId = button.getAttribute('id');
+        if (buttonId == 'scissors') {
+            playerChoice = 'scissors';
+        } else if (buttonId == 'rock') {
+            playerChoice = 'rock';
+        } else if (buttonId == 'paper') {
+            playerChoice = 'paper';
+        }
+
+
+        // this next part took me an embarrassingly long time to figure out
+        let winner = playRound(getComputerChoice(), playerChoice);
+
+        if (playerPoints != 5 && computerPoints != 5){
+            if (winner == 'player') {
+                playerPoints += 1;
+                pTagPlayer.textContent = `You: ${playerPoints}`
+            } else if (winner == 'computer') {
+                computerPoints += 1;
+                pTagComputer.textContent = `Computer: ${computerPoints}`
+            } else if (winner == 'tie!') {
+                pTagTie.style.cssText = 'color: yellow; opacity: 100%'
+                setTimeout(() => {pTagTie.style.cssText = 'color: yellow; transition: opacity 1s; opacity: 0%;'}, 500) // fade in-out effect
+            }
+        }else if (playerPoints == 5) {
+            buttons.forEach((button) => {
+                button.style.opacity = '50%';
+                button.style.cursor = 'default'
+            });
+
+            pTagPlayer.style.color = 'yellow';
+            pTagPlayer.textContent = 'You won!'
+            pTagComputer.style.opacity = '60%';
+        } else if (computerPoints == 5) {
+            buttons.forEach((button) => {
+                button.style.opacity = '50%';
+                button.style.cursor = 'default'
+            });
+
+            pTagPlayer.style.opacity = '60%';
+            pTagComputer.style.color = 'yellow';
+            pTagComputer.textContent = 'The computer won!'
+        }
+    })});
 }
 
 
-function decideWinner(computerChoice, playerChoice) {
-    const arr = ['rock', 'paper', 'scissors'];
-
+function playRound(computerChoice, playerChoice) {
     if (computerChoice === playerChoice) {
         return 'tie!'
     } else if ((computerChoice == 'rock' && playerChoice == 'scissors') || (computerChoice == 'scissors' && playerChoice == 'paper') || (computerChoice == 'paper' && playerChoice == 'rock')) {
-        return 'computer won'
-    } else if (!arr.includes(playerChoice)){
-        return 'wrong choice'
-    } else {
-        return 'player won'
+        return 'computer'
+    } else if ((computerChoice == 'rock' && playerChoice == 'paper') || (computerChoice == 'scissors' && playerChoice == 'rock') || (computerChoice == 'paper' && playerChoice == 'scissors')){
+        return 'player'
     }
 }
 
-
-let playerPoints = 0;
-let computerPoints = 0;
-let roundsToPlay = 4;
-for (let i = 0; i<=roundsToPlay; i++) {
-    let player = getPlayerChoice( prompt('rock || paper || scissors') );
-    let computer = getComputerChoice();
-    let winner = decideWinner(computer, player, computerPoints, playerPoints)
-    console.log( winner );
-
-    // tie or wrong choice by the player increases the rounds to play
-    if (winner == 'computer won') {
-        computerPoints += 1;
-    } else if (winner == 'player won') {
-        playerPoints += 1;
-    } else {
-        roundsToPlay += 1;
-    }
-}
-
-if (playerPoints > computerPoints) {
-    console.log('%c PLAYER WON!', 'font-size: 25px; color: yellow')
-} else {
-    console.log('%c COMPUTER WON!', 'font-size: 25px; color: yellow')
-}
+game();
