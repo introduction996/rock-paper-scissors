@@ -74,8 +74,9 @@ body {
 }
 
 .play-again {
-    margin: 30px;
-    width: 250px;
+    height: 40px;
+    width: 150px;
+    margin: 40px;
     display: flex;
     justify-content: center;
     align-items: center;

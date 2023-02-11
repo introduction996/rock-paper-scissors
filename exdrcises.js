@@ -7,11 +7,9 @@ function getComputerChoice() {
 
 let playerPoints = 0;
 let computerPoints = 0;
-
 const pTagPlayer = document.querySelector('.player');
 const pTagComputer = document.querySelector('.computer');
 const pTagTie = document.querySelector('.tie');
-
 
 function game() {
     let playerChoice;
@@ -34,20 +32,35 @@ function game() {
             if (winner == 'player') {
                 playerPoints += 1;
                 pTagPlayer.textContent = `You: ${playerPoints}`;
+                // check if player has won
                 if (playerPoints == 5) {
+                    //set the styles indicating victory
                     buttons.forEach((button) => {
                         button.style.opacity = '50%';
-                        button.style.cursor = 'default'
+                        button.style.cursor = 'default';
                     });
         
                     pTagPlayer.style.color = 'yellow';
                     pTagPlayer.textContent = 'You won!'
                     pTagComputer.style.opacity = '60%';
+
+                    // let the player play again
+                    const playAgainContainer = document.querySelector('.play-again');
+                    let playAgainButton = document.createElement('button');
+                    playAgainButton.setAttribute('id', 'play-again');
+                    playAgainButton.textContent = 'playAgain';
+                    playAgainButton.addEventListener('click', () => {
+                        location.reload();
+                    });
+                    playAgainContainer.appendChild(playAgainButton);
+                    playAgainContainer.style.opacity = '100%';
                 }
             } else if (winner == 'computer') {
                 computerPoints += 1;
-                pTagComputer.textContent = `Computer: ${computerPoints}`
+                pTagComputer.textContent = `Computer: ${computerPoints}`;
+                //check if computer has won
                 if (computerPoints == 5) {
+                    //set the styles indicating victory
                     buttons.forEach((button) => {
                         button.style.opacity = '50%';
                         button.style.cursor = 'default'
@@ -56,12 +69,23 @@ function game() {
                     pTagPlayer.style.opacity = '60%';
                     pTagComputer.style.color = 'yellow';
                     pTagComputer.textContent = 'The computer won!'
+
+                    // let the player play again
+                    const playAgainContainer = document.querySelector('.play-again');
+                    let playAgainButton = document.createElement('button');
+                    playAgainButton.setAttribute('id', 'play-again');
+                    playAgainButton.textContent = 'playAgain';
+                    playAgainButton.addEventListener('click', () => {
+                        location.reload();
+                    });
+                    playAgainContainer.appendChild(playAgainButton);
+                    playAgainContainer.style.opacity = '100%';
                 }
             } else if (winner == 'tie!') {
                 pTagTie.style.cssText = 'color: yellow; opacity: 100%'
                 setTimeout(() => {pTagTie.style.cssText = 'color: yellow; transition: opacity 1s; opacity: 0%;'}, 500) // fade in-out effect
             }
-        }
+        } // here ends this big messy 'if'
     })});
 }
 
