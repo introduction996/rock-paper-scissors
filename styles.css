@@ -22,6 +22,7 @@ body {
     font-weight: 600;
     margin: 25px;
     color: white;
+    user-select: none;
 }
 
 .computer,.player, .tie {
@@ -33,6 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .tie {

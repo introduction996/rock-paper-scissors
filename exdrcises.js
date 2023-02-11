@@ -36,7 +36,7 @@ function game() {
                 if (playerPoints == 5) {
                     //set the styles indicating victory
                     buttons.forEach((button) => {
-                        button.style.opacity = '50%';
+                        button.style.opacity = '40%';
                         button.style.cursor = 'default';
                     });
         
@@ -62,7 +62,7 @@ function game() {
                 if (computerPoints == 5) {
                     //set the styles indicating victory
                     buttons.forEach((button) => {
-                        button.style.opacity = '50%';
+                        button.style.opacity = '40%';
                         button.style.cursor = 'default'
                     });
         
@@ -82,7 +82,7 @@ function game() {
                     playAgainContainer.style.opacity = '100%';
                 }
             } else if (winner == 'tie!') {
-                pTagTie.style.cssText = 'color: yellow; opacity: 100%'
+                pTagTie.style.cssText = 'color: yellow; transition: opacity 1s; opacity: 100%;'
                 setTimeout(() => {pTagTie.style.cssText = 'color: yellow; transition: opacity 1s; opacity: 0%;'}, 500) // fade in-out effect
             }
         } // here ends this big messy 'if'
